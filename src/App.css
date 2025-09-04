@@ -1,0 +1,31 @@
+h1 {
+    text-align: center;
+}
+
+
+.glsl_editor {
+    width: calc(100vw - 400px);
+    min-height: 400px;
+}
+
+.ge_editor {
+    min-height: 400px;
+}
+
+@media only screen and (max-width: 800px) {
+    .ge_canvas_container {
+        padding: 25px !important;
+        position: relative !important;
+        display: flex;
+        justify-content: center;
+    }
+
+    .glsl_editor {
+        width: 100vw;
+    }
+
+    .ge_editor {
+        min-height: auto;
+    }
+
+}
