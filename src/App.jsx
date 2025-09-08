@@ -1,53 +1,47 @@
 import PWABadge from './PWABadge.jsx'
 import './App.css'
-import './glslEditor.min.js'
-import './glslEditor.css'
-import useEffectOnce from './hooks/useEffectOnce.js'
-
-
-function GlslCanvas({ identifier, initial_code }) {
-  useEffectOnce(() => {
-    const glslEditor = new GlslEditor('#' + identifier, {
-      canvas_size: 400,
-      canvas_draggable: false,
-      theme: 'monokai',
-      multipleBuffers: true,
-      watchHash: true,
-      fileDrops: true,
-      menu: false,
-      linewrap: true,
-      frag_header: `#ifdef GL_ES
-precision mediump float;
-#endif
-
-uniform vec2 u_resolution;
-uniform vec2 u_mouse;
-`
-    });
-  }, []);
-
-  return <div id={identifier} className='glsl_editor'>{initial_code}</div >
-}
+import GlslCanvas from './components/GlslEditor.jsx'
+import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
+import icon_dark from './assets/icon_dark.svg?no-inline'
+import icon_light from './assets/icon_light.svg?no-inline'
+import icon_lang from './assets/icon_lang.svg?no-inline'
+import useLocalStorage from 'use-local-storage';
+import Markdown from './components/Markdown.jsx';
+// content
+import introEn from './markdown/intro-en.md?raw'
+import favicon from './shaders/favicon.frag?raw'
 
 function App() {
+  const { t, i18n } = useTranslation();
+  const [darkmode, setDarkmode] = useLocalStorage("darkmode", true)
+  useEffect(() => {
+    if (!darkmode && !document.body.classList.contains("light")) {
+      document.body.classList.add("light")
+    }
+    if (darkmode && document.body.classList.contains("light")) {
+      document.body.classList.remove("light")
+    }
+  }, [darkmode])
 
+  const [english, setEnglish] = useLocalStorage("english", true)
+  useEffect(() => {
+    if (english) {
+      i18n.changeLanguage("en")
+    } else {
+      i18n.changeLanguage("de")
+    }
+  }, [english])
 
   return (
     <>
-      <h1>Computer Graphics Tutorial</h1>
-      <GlslCanvas identifier={"test"} initial_code={`void main() {
-    vec2 st = gl_FragCoord.xy/u_resolution.xy;
-    st.x *= u_resolution.x/u_resolution.y;
+      <h1>{t("tutorial")}</h1>
 
-    vec3 color = vec3(0.);
-    color = vec3(st.x,st.y,0.5);
+      <Markdown>{introEn}</Markdown>
 
-    gl_FragColor = vec4(color,1.0);
-}`} />
+      <GlslCanvas darkmode={darkmode} identifier={"test"} initial_code={favicon} />
 
-      Test Test
-
-      <GlslCanvas identifier={"test2"} initial_code={`void main() {
+      <GlslCanvas darkmode={darkmode} identifier={"test2"} initial_code={`void main() {
     vec2 st = gl_FragCoord.xy/u_resolution.xy;
     st.x *= u_resolution.x/u_resolution.y;
 
@@ -57,7 +51,16 @@ function App() {
 
     gl_FragColor = vec4(color,1.0);
 }`} />
+      {/* Badge for managing the state of the Progressive Web App service worker */}
       <PWABadge />
+      {/* dark/light mode toggle button */}
+      <button className='floating_button' onClick={() => { setDarkmode(!darkmode) }} style={{ filter: darkmode ? "invert()" : "none" }}>
+        <img src={darkmode ? icon_light : icon_dark}></img>
+      </button>
+      <button className='floating_button' onClick={() => { setEnglish(!english) }}
+        style={{ filter: darkmode ? "invert()" : "none", right: "60px" }}>
+        <img src={icon_lang}></img>
+      </button>
     </>
   )
 }

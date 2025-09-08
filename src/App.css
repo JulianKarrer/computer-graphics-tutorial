@@ -1,26 +1,90 @@
-h1 {
+body {
+    --canvas-size: 400px;
+    --editor-margin: 50px;
+
+    --bg: #242424;
+    --fg: #eee;
+    --editor--bg-colour: #272822;
+}
+
+code {
+    font-size: 16px;
+    background-color: var(--bg);
+    filter: brightness(0.8);
+    padding: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 5px;
+}
+
+h1,
+h2 {
     text-align: center;
 }
 
+/* light and dark mode variables */
+body.light {
+    --bg: #eee;
+    --fg: #242424;
+    --editor--bg-colour: white;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--fg);
+    /* hide x overflow */
+    overflow-x: hidden;
+}
+
+/* glsl editor styling */
+.CodeMirror {
+    font-family: JetBrainsMono-Regular, Source Code Pro, monospace !important;
+}
+
+.ge_canvas {
+    /* fix canvas size if viewport is too small */
+    aspect-ratio: 1;
+    width: 400px;
+    height: auto !important;
+}
+
+.glsl_editor_container {
+    position: relative;
+}
+
+.glsl_editor_resetbutton {
+    position: absolute;
+    bottom: 5px;
+    right: calc(10px + var(--canvas-size));
+    z-index: 100;
+}
 
 .glsl_editor {
-    width: calc(100vw - 400px);
     min-height: 400px;
+    margin-top: var(--editor-margin);
+    margin-bottom: var(--editor-margin);
+    background-color: var(--editor--bg-colour);
 }
 
 .ge_editor {
     min-height: 400px;
+    width: calc(100vw - 400px);
+    background-color: var(--editor--bg-colour) !important;
+}
+
+.ge_canvas_container {
+    position: absolute !important;
 }
 
 @media only screen and (max-width: 800px) {
     .ge_canvas_container {
-        padding: 25px !important;
         position: relative !important;
+        padding: 25px !important;
         display: flex;
         justify-content: center;
     }
 
-    .glsl_editor {
+    .ge_editor {
         width: 100vw;
     }
 
@@ -28,4 +92,43 @@ h1 {
         min-height: auto;
     }
 
+    .glsl_editor_resetbutton {
+        position: absolute;
+        bottom: 5px;
+        right: 10px;
+        z-index: 100;
+    }
+
+}
+
+/* style floating buttons that toggle 
+dark mode and language */
+
+.floating_button {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    background-color: transparent;
+    border: 2px solid black;
+    margin: 0;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    z-index: 200;
+    opacity: 0.4;
+    transition: opacity 200ms linear;
+}
+
+.floating_button:hover {
+    opacity: 1;
+    border-color: black;
+}
+
+/* only display katex mathml, not the html */
+.katex-html {
+    display: none
+}
+
+.katex {
+    font-size: 21px;
 }
