@@ -4,6 +4,10 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  build: {
+    outDir: "docs"
+  },
+  base: "/docs",
   plugins: [react(), VitePWA({
     registerType: 'prompt',
     injectRegister: false,
@@ -17,7 +21,7 @@ export default defineConfig({
       name: 'computer-graphics-tutorial',
       short_name: 'cg-tutorial',
       description: 'An interactive Tutorial for the Computer Graphics course at the University of Freiburg',
-      theme_color: '#ffffff',
+      theme_color: '#242424',
     },
 
     workbox: {

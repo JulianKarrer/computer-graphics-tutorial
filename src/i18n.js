@@ -8,13 +8,13 @@ const resources = {
     en: {
         translation: {
             "reset": "Reset",
-            "tutorial": "Computer Graphics Tutorial",
+            "tutorial": "Computer Graphics Online Tutorial",
         }
     },
     de: {
         translation: {
             "reset": "zurücksetzen",
-            "tutorial": "Computergrafik Tutorat",
+            "tutorial": "Computergrafik Online-Tutorat",
         }
     }
 };

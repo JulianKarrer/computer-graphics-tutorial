@@ -1,6 +1,7 @@
 body {
     --canvas-size: 400px;
-    --editor-margin: 50px;
+    --std-margin: 50px;
+
 
     --bg: #242424;
     --fg: #eee;
@@ -61,8 +62,8 @@ body {
 
 .glsl_editor {
     min-height: 400px;
-    margin-top: var(--editor-margin);
-    margin-bottom: var(--editor-margin);
+    margin-top: var(--std-margin);
+    margin-bottom: var(--std-margin);
     background-color: var(--editor--bg-colour);
 }
 
