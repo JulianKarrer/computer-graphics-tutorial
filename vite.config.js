@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     outDir: "docs"
   },
-  base: "/docs",
+  base: "/computer-graphics-tutorial",
   plugins: [react(), VitePWA({
     registerType: 'prompt',
     injectRegister: false,
