@@ -7,7 +7,8 @@ import icon_light from './assets/icon_light.svg?no-inline'
 import icon_lang from './assets/icon_lang.svg?no-inline'
 import useLocalStorage from 'use-local-storage';
 // content
-import IntroPage from './pages/IntroPage.jsx';
+import IntroPage from './pages/00-IntroPage.jsx';
+import RayCasting from './pages/01-Raycasting.jsx';
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -33,6 +34,7 @@ function App() {
   return (
     <>
       <IntroPage english={english} darkmode={darkmode} t={t}></IntroPage>
+      <RayCasting english={english} darkmode={darkmode} t={t}></RayCasting>
 
       {/* Badge for managing the state of the Progressive Web App service worker */}
       <PWABadge />

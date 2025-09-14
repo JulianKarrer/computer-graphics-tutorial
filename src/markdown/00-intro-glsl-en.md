@@ -1,5 +1,5 @@
 
-## An Introduction to GLSL
+# An Introduction to GLSL
 
 We will be using the OpenGL shading language (GLSL) to generate images by writing fragment shaders, which are a programmable part of the OpenGL rasterization rendering pipeline implemented by your graphics processor. All that matters to us in this context is that we get to write a function `void main` where:
 -  we have access to a normalized 2D position on the image plane in $[0;X]\times [0; Y]$ for an $X\times Y$ pixel image as input through the special variable `gl_FragCoord : vec2`

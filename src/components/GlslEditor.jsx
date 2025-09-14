@@ -8,7 +8,7 @@ import useLocalStorage from "use-local-storage";
 import { useTranslation } from "react-i18next";
 
 export default function GlslCanvas({ identifier, initial_code, darkmode }) {
-    const { t, i18n } = useTranslation();
+    const { t, _i18n } = useTranslation();
     const [editor, setEditor] = useState(null)
     const [code, setCode] = useLocalStorage(identifier, initial_code);
     const [isdark, setIsDark] = useState(darkmode);

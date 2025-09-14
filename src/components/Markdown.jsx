@@ -7,7 +7,8 @@ export default function Markdown({ children }) {
     return <div className='mdcontainer'>
         <ReactMarkdown
             remarkPlugins={[remarkMath]}
-            rehypePlugins={[rehypeKatex]}>
+            rehypePlugins={[rehypeKatex]}
+        >
             {children}
         </ReactMarkdown>
     </div>
